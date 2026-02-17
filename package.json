@@ -1,0 +1,98 @@
+{
+  "name": "@microbit/capacitor-sqlite-vanilla",
+  "version": "0.0.1",
+  "description": "Minimal Capacitor SQLite plugin using platform-provided SQLite (no encryption)",
+  "main": "dist/plugin.cjs.js",
+  "module": "dist/esm/index.js",
+  "types": "dist/esm/index.d.ts",
+  "unpkg": "dist/plugin.js",
+  "files": [
+    "android/src/main/",
+    "android/build.gradle",
+    "dist/",
+    "ios/Plugin/",
+    "MicrobitCapacitorSqliteVanilla.podspec"
+  ],
+  "author": "Micro:bit Educational Foundation",
+  "license": "MIT",
+  "keywords": [
+    "capacitor",
+    "plugin",
+    "native",
+    "database",
+    "sqlite"
+  ],
+  "scripts": {
+    "build": "npm run clean && tsc && rollup -c rollup.config.mjs",
+    "clean": "rimraf ./dist",
+    "watch": "tsc --watch",
+    "lint": "npm run eslint && npm run prettier -- --check && npm run swiftlint -- lint",
+    "fmt": "npm run eslint -- --fix && npm run prettier -- --write && npm run swiftlint -- --fix --format",
+    "eslint": "eslint . --ext ts",
+    "prettier": "prettier \"**/*.{css,html,ts,js,java}\" --plugin=prettier-plugin-java",
+    "swiftlint": "node-swiftlint",
+    "verify:ios": "set -o pipefail && cd ios && pod install && xcodebuild clean build test -workspace Plugin.xcworkspace -scheme Plugin -destination \"platform=iOS Simulator,name=iPhone 17\" | xcpretty && cd ..",
+    "verify:android": "cd android && ./gradlew clean build test && cd .."
+  },
+  "devDependencies": {
+    "@capacitor/android": "^7.0.0",
+    "@capacitor/core": "^7.0.0",
+    "@capacitor/ios": "^7.0.0",
+    "@ionic/eslint-config": "^0.4.0",
+    "@ionic/prettier-config": "^4.0.0",
+    "@ionic/swiftlint-config": "^2.0.0",
+    "@rollup/plugin-node-resolve": "^16.0.0",
+    "eslint": "^8.57.1",
+    "prettier": "^3.6.2",
+    "prettier-plugin-java": "^2.7.7",
+    "rimraf": "^6.0.1",
+    "rollup": "^4.30.0",
+    "swiftlint": "^2.0.0",
+    "typescript": "~5.7.0"
+  },
+  "eslintConfig": {
+    "extends": "@ionic/eslint-config/recommended"
+  },
+  "prettier": "@ionic/prettier-config",
+  "swiftlint": {
+    "excluded": [
+      "${PWD}/node_modules",
+      "${PWD}/ios/Pods"
+    ],
+    "opt_in_rules": [
+      "implicitly_unwrapped_optional",
+      "file_name_no_space",
+      "force_unwrapping",
+      "function_default_parameter_at_end",
+      "lower_acl_than_parent",
+      "modifier_order",
+      "overridden_super_call",
+      "unowned_variable_capture"
+    ],
+    "identifier_name": {
+      "min_length": 1,
+      "allowed_symbols": ["_"]
+    },
+    "line_length": {
+      "warning": 150,
+      "ignores_function_declarations": true,
+      "ignores_comments": true,
+      "ignores_interpolated_strings": true,
+      "ignores_urls": true
+    },
+    "cyclomatic_complexity": {
+      "warning": 15
+    }
+  },
+  "peerDependencies": {
+    "@capacitor/core": ">=7.0.0"
+  },
+  "capacitor": {
+    "ios": {
+      "src": "ios"
+    },
+    "android": {
+      "src": "android"
+    }
+  }
+}
