@@ -1,6 +1,6 @@
 {
   "name": "@microbit/capacitor-sqlite-vanilla",
-  "version": "0.0.1",
+  "version": "0.1.0",
   "description": "Minimal Capacitor SQLite plugin using platform-provided SQLite (no encryption)",
   "main": "dist/plugin.cjs.js",
   "module": "dist/esm/index.js",
@@ -71,7 +71,9 @@
     ],
     "identifier_name": {
       "min_length": 1,
-      "allowed_symbols": ["_"]
+      "allowed_symbols": [
+        "_"
+      ]
     },
     "line_length": {
       "warning": 150,
