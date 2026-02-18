@@ -94,7 +94,7 @@ jobs:
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
 
-      - uses: microbit-foundation/npm-package-versioner-action@v1
+      - uses: microbit-foundation/npm-package-versioner-action@v3
 
       - name: Install plugin dependencies
         run: npm ci
