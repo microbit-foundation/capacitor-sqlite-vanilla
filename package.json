@@ -23,6 +23,9 @@
     "url": "https://github.com/microbit-foundation/capacitor-sqlite-vanilla/issues"
   },
   "homepage": "https://github.com/microbit-foundation/capacitor-sqlite-vanilla",
+  "publishConfig": {
+    "access": "public"
+  },
   "keywords": [
     "capacitor",
     "plugin",
