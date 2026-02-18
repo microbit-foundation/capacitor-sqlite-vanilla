@@ -15,6 +15,14 @@
   ],
   "author": "Micro:bit Educational Foundation",
   "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/microbit-foundation/capacitor-sqlite-vanilla.git"
+  },
+  "bugs": {
+    "url": "https://github.com/microbit-foundation/capacitor-sqlite-vanilla/issues"
+  },
+  "homepage": "https://github.com/microbit-foundation/capacitor-sqlite-vanilla",
   "keywords": [
     "capacitor",
     "plugin",

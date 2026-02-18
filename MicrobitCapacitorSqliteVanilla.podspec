@@ -7,9 +7,9 @@ Pod::Spec.new do |s|
   s.version = package['version']
   s.summary = package['description']
   s.license = package['license']
-  s.homepage = 'https://github.com/microbit-foundation/ml-trainer'
+  s.homepage = 'https://github.com/microbit-foundation/capacitor-sqlite-vanilla'
   s.author = package['author']
-  s.source = { :git => 'https://github.com/microbit-foundation/ml-trainer.git', :tag => s.version.to_s }
+  s.source = { :git => 'https://github.com/microbit-foundation/capacitor-sqlite-vanilla.git', :tag => s.version.to_s }
   s.source_files = 'ios/Plugin/**/*.{swift,h,m,c,cc,mm,cpp}'
   s.ios.deployment_target = '14.0'
   s.dependency 'Capacitor'
