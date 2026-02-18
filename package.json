@@ -17,7 +17,7 @@
   "license": "MIT",
   "repository": {
     "type": "git",
-    "url": "https://github.com/microbit-foundation/capacitor-sqlite-vanilla.git"
+    "url": "git+https://github.com/microbit-foundation/capacitor-sqlite-vanilla.git"
   },
   "bugs": {
     "url": "https://github.com/microbit-foundation/capacitor-sqlite-vanilla/issues"
