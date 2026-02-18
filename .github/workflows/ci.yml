@@ -73,9 +73,6 @@ jobs:
       - name: Install dependencies
         run: npm ci
 
-      - name: Select Xcode
-        run: sudo xcode-select -s /Applications/Xcode_26.2.app
-
       - name: SwiftLint
         run: npm run swiftlint -- lint
 
