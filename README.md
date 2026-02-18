@@ -2,7 +2,12 @@
 
 Minimal Capacitor 7 plugin for SQLite on iOS and Android.
 
-No encryption (and no crypto export drama). No web support.
+No encryption (no crypto export drama). No web support.
+
+**Stumbled across this?** This plugin has intentionally limited scope and has
+had no real world use outside of one app. Your goals might be better met via
+https://github.com/capacitor-community/sqlite or perhaps
+https://capawesome.io/plugins/sqlite/ (commercial).
 
 ## Supported versions
 
