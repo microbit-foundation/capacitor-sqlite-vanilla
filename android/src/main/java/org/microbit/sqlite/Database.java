@@ -42,8 +42,8 @@ class Database {
         this.connection = driver.open(this.path, SQLITE_OPEN_READWRITE | SQLITE_OPEN_CREATE | SQLITE_OPEN_FULLMUTEX);
 
         // Standard pragmas for mobile use.
-        executeRaw("PRAGMA foreign_keys = ON;");
-        executeRaw("PRAGMA journal_mode = WAL;");
+        execute("PRAGMA foreign_keys = ON;");
+        execute("PRAGMA journal_mode = WAL;");
     }
 
     boolean isOpen() {
@@ -59,20 +59,22 @@ class Database {
 
     // Execute raw SQL (DDL, multi-statement).
     long execute(String statements) {
-        executeRaw(statements);
-        return getChanges();
-    }
-
-    private void executeRaw(String sql) {
         if (connection == null) {
             throw new IllegalStateException("Database is not open");
         }
-        SQLiteStatement stmt = connection.prepare(sql);
-        try {
-            stmt.step();
-        } finally {
-            stmt.close();
+        for (String sql : statements.split(";")) {
+            String trimmed = sql.trim();
+            if (trimmed.isEmpty()) {
+                continue;
+            }
+            SQLiteStatement stmt = connection.prepare(trimmed + ";");
+            try {
+                stmt.step();
+            } finally {
+                stmt.close();
+            }
         }
+        return getChanges();
     }
 
     // Run a single parameterized write statement.
@@ -146,7 +148,7 @@ class Database {
     // Execute multiple parameterized statements in a transaction.
     long executeSet(List<String[]> set, List<JSONArray> valuesList, boolean transaction) throws JSONException {
         if (transaction) {
-            executeRaw("BEGIN TRANSACTION;");
+            execute("BEGIN TRANSACTION;");
         }
         long totalChanges = 0;
         try {
@@ -155,12 +157,12 @@ class Database {
                 totalChanges += result[0];
             }
             if (transaction) {
-                executeRaw("COMMIT;");
+                execute("COMMIT;");
             }
         } catch (Exception e) {
             if (transaction) {
                 try {
-                    executeRaw("ROLLBACK;");
+                    execute("ROLLBACK;");
                 } catch (Exception ignored) {}
             }
             throw e;
