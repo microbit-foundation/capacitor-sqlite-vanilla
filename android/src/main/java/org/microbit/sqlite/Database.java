@@ -90,7 +90,7 @@ class Database {
             // Get changes and last insert rowid.
             long changes = getChanges();
             long lastId = getLastInsertRowId();
-            return new long[] { changes, lastId };
+            return new long[] {changes, lastId};
         } finally {
             stmt.close();
         }
