@@ -15,6 +15,10 @@
   ],
   "author": "Micro:bit Educational Foundation",
   "license": "MIT",
+  "allowScripts": {
+    "fsevents": true,
+    "swiftlint": true
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/microbit-foundation/capacitor-sqlite-vanilla.git"

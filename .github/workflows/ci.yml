@@ -11,15 +11,18 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
+
+      - name: Upgrade npm
+        run: npm install -g npm@11 --registry=https://registry.npmjs.org
 
       - name: Install dependencies
         run: npm ci
@@ -34,21 +37,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
+
+      - name: Upgrade npm
+        run: npm install -g npm@11 --registry=https://registry.npmjs.org
 
       - name: Install dependencies
         run: npm ci
 
       - name: Setup Java
-        uses: actions/setup-java@cf277c60eb25467037889841efdb72551f06f6c3 # v4
+        uses: actions/setup-java@v5
         with:
           distribution: 'jetbrains'
           java-version-file: '.java-version'
@@ -68,15 +74,18 @@ jobs:
           xcodebuild -downloadPlatform iOS
 
       - name: Checkout
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@v7
         with:
           fetch-depth: 1
 
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
+
+      - name: Upgrade npm
+        run: npm install -g npm@11 --registry=https://registry.npmjs.org
 
       - name: Install dependencies
         run: npm ci
@@ -93,14 +102,17 @@ jobs:
     needs: [build, verify-ios, verify-android]
     steps:
       - name: Checkout
-        uses: actions/checkout@11d5960a326750d5838078e36cf38b85af677262 # v4
+        uses: actions/checkout@v7
 
       - name: Setup Node.js
-        uses: actions/setup-node@49933ea5288caeca8642d1e84afbd3f7d6820020 # v4
+        uses: actions/setup-node@v6
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
           registry-url: 'https://registry.npmjs.org'
+
+      - name: Upgrade npm
+        run: npm install -g npm@11 --registry=https://registry.npmjs.org
 
       - uses: microbit-foundation/npm-package-versioner-action@v3
 
@@ -110,6 +122,6 @@ jobs:
       - name: Build plugin
         run: npm run build
 
-      - run: npm publish
+      - run: npm publish --allow-directory=all
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
