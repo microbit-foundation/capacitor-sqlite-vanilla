@@ -9,7 +9,7 @@ buildscript {
         mavenCentral()
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:8.13.0'
+        classpath 'com.android.tools.build:gradle:8.13.2'
     }
 }
 
@@ -48,6 +48,6 @@ dependencies {
     implementation fileTree(dir: 'libs', include: ['*.jar'])
     implementation project(':capacitor-android')
     implementation "androidx.appcompat:appcompat:$androidxAppCompatVersion"
-    implementation 'androidx.sqlite:sqlite-bundled:2.6.2'
+    implementation 'androidx.sqlite:sqlite-bundled:2.7.0'
     testImplementation "junit:junit:$junitVersion"
 }
