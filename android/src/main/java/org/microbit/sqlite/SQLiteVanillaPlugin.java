@@ -154,7 +154,7 @@ public class SQLiteVanillaPlugin extends Plugin {
                 JSONObject item = setArray.getJSONObject(i);
                 String stmt = item.getString("statement");
                 JSONArray vals = item.optJSONArray("values");
-                statements.add(new String[] {stmt});
+                statements.add(new String[] { stmt });
                 valuesList.add(vals);
             }
             long totalChanges = db.executeSet(statements, valuesList, transaction);

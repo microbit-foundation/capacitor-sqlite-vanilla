@@ -90,7 +90,7 @@ class Database {
             // Get changes and last insert rowid.
             long changes = getChanges();
             long lastId = getLastInsertRowId();
-            return new long[] {changes, lastId};
+            return new long[] { changes, lastId };
         } finally {
             stmt.close();
         }
@@ -222,7 +222,7 @@ class Database {
                 } else if (value instanceof Double || value instanceof Float) {
                     stmt.bindDouble(idx, ((Number) value).doubleValue());
                 } else if (value instanceof Boolean) {
-                    stmt.bindLong(idx, ((Boolean) value) ? 1 : 0);
+                    stmt.bindLong(idx, (Boolean) value ? 1 : 0);
                 } else {
                     stmt.bindText(idx, value.toString());
                 }
