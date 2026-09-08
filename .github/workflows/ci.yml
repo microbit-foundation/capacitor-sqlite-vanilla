@@ -6,6 +6,10 @@ on:
     branches:
       - '**'
 
+env:
+  # renovate: datasource=npm depName=npm
+  NPM_VERSION: '11'
+
 jobs:
   build:
     runs-on: ubuntu-latest
@@ -22,7 +26,7 @@ jobs:
           cache: 'npm'
 
       - name: Upgrade npm
-        run: npm install -g npm@11 --registry=https://registry.npmjs.org
+        run: npm install -g npm@${{ env.NPM_VERSION }} --registry=https://registry.npmjs.org
 
       - name: Install dependencies
         run: npm ci
@@ -48,7 +52,7 @@ jobs:
           cache: 'npm'
 
       - name: Upgrade npm
-        run: npm install -g npm@11 --registry=https://registry.npmjs.org
+        run: npm install -g npm@${{ env.NPM_VERSION }} --registry=https://registry.npmjs.org
 
       - name: Install dependencies
         run: npm ci
@@ -85,7 +89,7 @@ jobs:
           cache: 'npm'
 
       - name: Upgrade npm
-        run: npm install -g npm@11 --registry=https://registry.npmjs.org
+        run: npm install -g npm@${{ env.NPM_VERSION }} --registry=https://registry.npmjs.org
 
       - name: Install dependencies
         run: npm ci
@@ -97,8 +101,10 @@ jobs:
         run: npm run verify:ios
 
   release:
-    if: github.event_name == 'release' && github.event.action == 'created'
+    if: github.event_name == 'release'
     runs-on: ubuntu-latest
+    permissions:
+      contents: read
     needs: [build, verify-ios, verify-android]
     steps:
       - name: Checkout
@@ -109,10 +115,9 @@ jobs:
         with:
           node-version-file: '.nvmrc'
           cache: 'npm'
-          registry-url: 'https://registry.npmjs.org'
 
       - name: Upgrade npm
-        run: npm install -g npm@11 --registry=https://registry.npmjs.org
+        run: npm install -g npm@${{ env.NPM_VERSION }} --registry=https://registry.npmjs.org
 
       - uses: microbit-foundation/npm-package-versioner-action@v3
 
@@ -122,6 +127,29 @@ jobs:
       - name: Build plugin
         run: npm run build
 
-      - run: npm publish --allow-directory=all
-        env:
-          NODE_AUTH_TOKEN: ${{ secrets.NPM_TOKEN }}
+      - run: npm pack
+      - uses: actions/upload-artifact@v7
+        with:
+          name: npm-tarball
+          path: '*.tgz'
+          if-no-files-found: error
+          retention-days: 1
+
+  publish:
+    needs: release
+    if: github.event_name == 'release'
+    runs-on: ubuntu-latest
+    environment: npm-publish
+    permissions:
+      contents: read
+      id-token: write
+    steps:
+      - uses: actions/download-artifact@v8
+        with:
+          name: npm-tarball
+      - uses: actions/setup-node@v6
+        with:
+          node-version-file: '.nvmrc'
+          registry-url: 'https://registry.npmjs.org'
+      - run: npm install -g npm@${{ env.NPM_VERSION }} --registry=https://registry.npmjs.org
+      - run: npm stage publish --allow-file=all ./*.tgz
