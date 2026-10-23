@@ -48,7 +48,7 @@
     "eslint": "eslint . --ext ts",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\" --plugin=prettier-plugin-java",
     "swiftlint": "node-swiftlint",
-    "verify:ios": "xcodebuild test -scheme MicrobitCapacitorSqliteVanilla -destination \"platform=iOS Simulator,name=iPhone 17,OS=26.0.1\"",
+    "verify:ios": "xcodebuild test -scheme MicrobitCapacitorSqliteVanilla -destination \"platform=iOS Simulator,name=iPhone 17,OS=latest\"",
     "verify:android": "cd android && ./gradlew clean build test && cd .."
   },
   "devDependencies": {
