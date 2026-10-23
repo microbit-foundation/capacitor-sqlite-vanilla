@@ -10,7 +10,9 @@
     "android/src/main/",
     "android/build.gradle",
     "dist/",
-    "ios/Plugin/",
+    "ios/Sources",
+    "ios/Tests",
+    "Package.swift",
     "MicrobitCapacitorSqliteVanilla.podspec"
   ],
   "author": "Micro:bit Educational Foundation",
@@ -46,7 +48,7 @@
     "eslint": "eslint . --ext ts",
     "prettier": "prettier \"**/*.{css,html,ts,js,java}\" --plugin=prettier-plugin-java",
     "swiftlint": "node-swiftlint",
-    "verify:ios": "set -o pipefail && cd ios && pod install && xcodebuild clean build test -workspace Plugin.xcworkspace -scheme Plugin -destination \"platform=iOS Simulator,name=iPhone 17,OS=26.0.1\" | xcpretty && cd ..",
+    "verify:ios": "xcodebuild test -scheme MicrobitCapacitorSqliteVanilla -destination \"platform=iOS Simulator,name=iPhone 17,OS=26.0.1\"",
     "verify:android": "cd android && ./gradlew clean build test && cd .."
   },
   "devDependencies": {
@@ -72,7 +74,7 @@
   "swiftlint": {
     "excluded": [
       "${PWD}/node_modules",
-      "${PWD}/ios/Pods"
+      "${PWD}/ios/.build"
     ],
     "opt_in_rules": [
       "implicitly_unwrapped_optional",
