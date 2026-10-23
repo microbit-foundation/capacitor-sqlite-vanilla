@@ -1,6 +1,6 @@
 # @microbit/capacitor-sqlite-vanilla
 
-Minimal Capacitor 7 plugin for SQLite on iOS and Android.
+Minimal Capacitor 8 plugin for SQLite on iOS and Android.
 
 No encryption (no crypto export drama). No web support.
 
@@ -20,10 +20,9 @@ avoids the fragmentation of Android's system SQLite.
 ### iOS
 
 Uses the system `sqlite3` framework. The SQLite version depends on the user's OS
-version — the minimum is **SQLite 3.32.3** (iOS 14, the lowest version supported
-by Capacitor 7). Notable features unavailable on older iOS versions include:
+version — the minimum is **SQLite 3.36.0** (iOS 15, the lowest version supported
+by Capacitor 8). Notable features unavailable on older iOS versions include:
 
-- `RETURNING` clause and `ALTER TABLE DROP COLUMN` (3.35.0, iOS 15+)
 - `STRICT` tables (3.37.0, iOS 15.4+)
 - Built-in JSON operators `->` / `->>` (3.38.0, iOS 16+)
 - `RIGHT` and `FULL OUTER JOIN` (3.39.0, iOS 16+)
@@ -72,6 +71,14 @@ await db.close();
 npm install
 npm run build
 ```
+
+The iOS plugin is a Swift package (`Package.swift`), so apps installing via Swift
+Package Manager pick it up directly. A CocoaPods podspec is published alongside it
+for apps still on the CocoaPods install path — both build the same sources under
+`ios/Sources`.
+
+`npm run verify:ios` builds the Swift package and runs its tests on an iOS
+simulator; `npm run verify:android` does the equivalent for Android.
 
 ## License
 
