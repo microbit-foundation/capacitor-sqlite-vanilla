@@ -74,7 +74,7 @@
   "swiftlint": {
     "excluded": [
       "${PWD}/node_modules",
-      "${PWD}/ios/.build"
+      "${PWD}/.build"
     ],
     "opt_in_rules": [
       "implicitly_unwrapped_optional",
