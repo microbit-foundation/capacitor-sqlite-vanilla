@@ -7,5 +7,6 @@ local.properties
 /.build/
 /.swiftpm/
 /Packages/
+/Package.resolved
 DerivedData/
 .netrc
