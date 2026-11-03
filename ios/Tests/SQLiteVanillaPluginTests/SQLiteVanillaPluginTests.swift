@@ -4,9 +4,9 @@
  * SPDX-License-Identifier: MIT
  */
 import XCTest
-@testable import Plugin
+@testable import SQLiteVanillaPlugin
 
-class PluginTests: XCTestCase {
+class SQLiteVanillaPluginTests: XCTestCase {
     func testPlaceholder() {
         XCTAssertTrue(true)
     }

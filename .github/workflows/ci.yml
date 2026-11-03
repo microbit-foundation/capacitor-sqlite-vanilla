@@ -149,7 +149,7 @@ jobs:
           name: npm-tarball
       - uses: actions/setup-node@249970729cb0ef3589644e2896645e5dc5ba9c38 # v6
         with:
-          node-version-file: '.nvmrc'
+          node-version: '24.x'
           registry-url: 'https://registry.npmjs.org'
       - run: npm install -g npm@${{ env.NPM_VERSION }} --registry=https://registry.npmjs.org
       - run: npm stage publish --allow-file=all ./*.tgz
